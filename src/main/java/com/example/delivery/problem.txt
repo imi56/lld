@@ -1,0 +1,28 @@
+
+phase 1 problem:
+Design a delivery system in which drivers can be added. While creating the driver driver uid and delivery hourly
+rate will be provided.
+Now create add a functinality to assign new delivery to the drivers, the assign delivery will accpet the driver
+uid and time slot for the delivery. let say driver 1 will deliver between 1 to 2 pm.
+Now finanace team needs to know how much amount it owes to driver.
+
+Phase 2 problem:
+Now I want to extend the problem. I need the functinality where I can pay to drivers who have deliverd before
+certain time lets say pay to all drivers who have deliverd before 3 pm.
+
+Now finanace team needs to know how much amount has paid to drivers and how much it owes to each drivers.
+
+
+----- Problem 2
+
+Phase 1
+desigh a salable key value store system. where you can get, put and delete the keys.
+
+Phase 2
+Now it need to support the transactional operation, if we rollback the transaction then it should abort the 
+put or delete operation.
+
+phase 3
+Now it should support nested transaction. if the child transaction is rollbacked then again it should abot the 
+made changes but parent transaction operation should be intact, if the parent transaction is rollbacked then
+both parent and child operations should be aborted.
