@@ -1,4 +1,4 @@
-package com.example.sql_database;
+package com.practice.sql_database;
 
 public abstract class Column {
   private String name;

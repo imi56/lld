@@ -1,4 +1,4 @@
-package com.example.graph;
+package com.practice.graph;
 
 class CurrencyConversion {
   public static void main(String[] args) {

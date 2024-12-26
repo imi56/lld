@@ -1,4 +1,4 @@
-package com.example.sql_database;
+package com.practice.sql_database;
 
 class IntegerColumn extends Column {
   public IntegerColumn(String name) {

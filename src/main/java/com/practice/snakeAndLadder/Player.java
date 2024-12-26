@@ -1,4 +1,4 @@
-package com.example.snakeAndLadder;
+package com.practice.snakeAndLadder;
 
 public class Player {
   private String name;
