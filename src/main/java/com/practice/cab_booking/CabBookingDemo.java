@@ -10,7 +10,7 @@ public class CabBookingDemo {
     // Create the scoring weights for the driver matching strategy
     Map<DriverScoringStrategy, Double> scoringWeights = new HashMap<>();
     scoringWeights.put(new DistanceScoringStrategy(), 0.5);
-    // scoringWeights.put(new RatingScoringStrategy(), 0.3);
+    scoringWeights.put(new RatingScoringStrategy(), 0.3);
     // scoringWeights.put(new CompletedTripsScoringStrategy(), 0.2);
 
     // Create the matching strategy with the scoring weights
