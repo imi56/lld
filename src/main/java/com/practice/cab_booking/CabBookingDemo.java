@@ -56,6 +56,7 @@ public class CabBookingDemo {
 
         // End the trip and process payment
         trip.endTrip();
+        trip.getDriver().addCompletedTrip(trip);
     } catch (Exception e) {
         System.out.println("Failed to book cab: " + e.getMessage());
     }

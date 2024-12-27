@@ -24,8 +24,9 @@ public class MultiFactorMatchingStrategy implements DriverMatchingStrategy {
                 double weight = entry.getValue();
                 totalScore += strategy.calculateScore(driver, passenger, passenger.getCurrentLocation()) * weight;
             }
-
-            driverScores.put(driver, totalScore);
+            if(driver.getCab().getStatus() == CabStatus.AVAILABLE) {
+                driverScores.put(driver, totalScore);
+            }
         }
 
         List<Driver> sortedDrivers = new ArrayList<>(drivers);
