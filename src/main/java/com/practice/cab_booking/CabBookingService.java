@@ -6,6 +6,16 @@ import java.util.List;
 public class CabBookingService {
   private final List<Driver> drivers = new ArrayList<>();
     private DriverMatchingStrategy matchingStrategy;
+    
+    // private static CabBookingService instance;
+    
+    // public static synchronized CabBookingService getInstance(DriverMatchingStrategy matchingStrategy) {
+    //     if (instance == null) {
+    //         instance = new CabBookingService(matchingStrategy);
+    //     }
+    //     return instance;
+    // }
+
 
     public CabBookingService(DriverMatchingStrategy matchingStrategy) {
         this.matchingStrategy = matchingStrategy;
