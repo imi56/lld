@@ -2,6 +2,7 @@ package com.practice.cab_booking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class CabBookingService {
   private final List<Driver> drivers = new ArrayList<>();
@@ -30,38 +31,47 @@ public class CabBookingService {
     }
 
     public Trip bookCab(List<Passenger> passengers) {
-        List<Driver> matchedDrivers = matchingStrategy.matchDrivers(drivers, passengers.get(0));
+    PriorityQueue<Driver> matchedDrivers = matchingStrategy.matchDrivers(drivers, passengers.get(0));
 
-        for (Driver driver : matchedDrivers) {
-            if (driver.getCab().canAccommodate(passengers.size())) {
-                System.out.println("Requesting ride from driver: " + driver);
-                if (driver.acceptRide()) {
-                    driver.getCab().setStatus(CabStatus.ON_TRIP);
-                    driver.getCab().addPassengers(passengers.size());
+    while (!matchedDrivers.isEmpty()) {
+        Driver driver = matchedDrivers.poll(); // Get the highest-priority driver
+        if (driver.getCab().canAccommodate(passengers.size())) {
+            System.out.println("Requesting ride from driver: " + driver);
 
-                    // Get the Surge Pricing Strategy with the appropriate base fare strategy
-                    PricingStrategy pricingStrategy = PricingStrategyFactory.getPricingStrategy(
-                        driver.getCab().getType(),
-                        DemandHourCalculator.getCurrentDemandHour());
+            if (driver.acceptRide()) {
+                driver.getCab().setStatus(CabStatus.ON_TRIP);
+                driver.getCab().addPassengers(passengers.size());
 
-                    // Calculate the fare for each passenger
-                    for (Passenger passenger : passengers) {
-                        double fare = pricingStrategy.calculateFare(
-                            passenger.getCurrentLocation(),
-                            passenger.getDestination()
-                        );
-                        passenger.setIndividualFare(fare);
-                    }
+                // Calculate fare
+                PricingStrategy pricingStrategy = PricingStrategyFactory.getPricingStrategy(
+                    driver.getCab().getType(),
+                    DemandHourCalculator.getCurrentDemandHour()
+                );
 
-                    // Create and start the trip
-                    Trip trip = new Trip(passengers, driver);
-                    trip.startTrip();
-                    return trip;
-                } else {
-                    driver.declineRide();
+                for (Passenger passenger : passengers) {
+                    double fare = pricingStrategy.calculateFare(
+                        passenger.getCurrentLocation(),
+                        passenger.getDestination()
+                    );
+                    passenger.setIndividualFare(fare);
                 }
+
+                Trip trip = new Trip(
+                    passengers, 
+                    driver, 
+                    passengers.get(0).getCurrentLocation(), 
+                    passengers.get(0).getDestination()
+                );
+                trip.startTrip();
+                return trip;
+            } else {
+                System.out.println("Driver " + driver.getName() + " declined the ride.");
+                driver.declineRide();
             }
         }
-        throw new RuntimeException("No available drivers found for the requested trip.");
     }
+
+    throw new RuntimeException("No available drivers found for the requested trip.");
+}
+
 }

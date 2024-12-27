@@ -5,12 +5,12 @@ import java.util.List;
 public class Trip {
   private List<Passenger> passengers;
     private Driver driver;
-    private boolean isCompleted;
+    private Location starLocation;
+    private Location endLocation;
 
-    public Trip(List<Passenger> passengers, Driver driver) {
+    public Trip(List<Passenger> passengers, Driver driver, Location starLocation, Location endLocation) {
         this.passengers = passengers;
         this.driver = driver;
-        this.isCompleted = false;
     }
 
     public void startTrip() {
@@ -22,7 +22,6 @@ public class Trip {
     }
 
     public void endTrip() {
-        isCompleted = true;
         driver.addCompletedTrip(this);
         System.out.println("Trip completed: Passengers=" + passengers + " with " + driver);
         processPayment();

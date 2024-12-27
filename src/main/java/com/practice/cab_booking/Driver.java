@@ -22,6 +22,10 @@ public class Driver {
         return cab;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public double getRating() {
         return rating;
     }
