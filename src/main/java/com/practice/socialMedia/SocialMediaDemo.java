@@ -11,10 +11,13 @@ public class SocialMediaDemo {
     // Register users
     userService.registerUser("Alice");
     feedService.registerUserFeed("Alice");
+
     userService.registerUser("Bob");
     feedService.registerUserFeed("Bob");
+
     userService.registerUser("Charlie");
     feedService.registerUserFeed("Charlie");
+    
     userService.registerUser("Diana");
     feedService.registerUserFeed("Diana");
 
