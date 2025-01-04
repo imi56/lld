@@ -3,7 +3,7 @@ package com.practice.socialMedia;
 import java.util.*;
 import java.util.concurrent.*;
 
-public class FeedService {
+public class FeedService implements PostObserver {
     // NavigableSet (TreeSet)	
     // self-balancing binary search tree (e.g., Red-Black Tree) under the hood.
     // provides an efficient way to store and access sorted data,
@@ -31,6 +31,11 @@ public class FeedService {
 
     public void registerUserFeed(String userId) {
         userFeeds.putIfAbsent(userId, new TreeSet<>(Comparator.comparing(Post::getTimestamp).reversed()));
+    }
+
+    @Override
+    public void onPostCreated(String authorId, Post post, Set<String> followers) {
+        updateFeeds(authorId, post, followers);
     }
 
     public void updateFeeds(String authorId, Post post, Set<String> followers) {

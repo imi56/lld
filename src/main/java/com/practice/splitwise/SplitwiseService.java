@@ -51,8 +51,10 @@ class SplitwiseService {
   }
 
   public List<Transaction> settleTransactions() {
-      PriorityQueue<Map.Entry<User, Double>> creditors = new PriorityQueue<>((a, b) -> Double.compare(b.getValue(), a.getValue()));
-      PriorityQueue<Map.Entry<User, Double>> debtors = new PriorityQueue<>((a, b) -> Double.compare(a.getValue(), b.getValue()));
+      PriorityQueue<Map.Entry<User, Double>> creditors = new PriorityQueue<>(
+        (a, b) -> Double.compare(b.getValue(), a.getValue()));
+      PriorityQueue<Map.Entry<User, Double>> debtors = new PriorityQueue<>(
+        (a, b) -> Double.compare(a.getValue(), b.getValue()));
 
       for (Map.Entry<User, Double> entry : balanceSheet.entrySet()) {
           if (entry.getValue() > 0) creditors.add(entry);
