@@ -6,7 +6,7 @@ public class SocialMediaDemo {
   public static void main(String[] args) {
     FeedService feedService = new FeedService(new DefaultFeedStrategyImpl());
     UserService userService = new UserService();
-    PostService postService = new PostService(feedService, userService);
+    PostService postService = new PostService(userService);
     postService.registerObserver(feedService);
 
     // Register users

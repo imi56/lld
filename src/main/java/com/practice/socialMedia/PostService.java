@@ -8,11 +8,9 @@ import java.util.UUID;
 public class PostService implements PostSubject {
      private final List<PostObserver> observers = new ArrayList<>();
 
-    private final FeedService feedService;
     private final UserService userService;
 
-    public PostService(FeedService feedService, UserService userService) {
-        this.feedService = feedService;
+    public PostService(UserService userService) {
         this.userService = userService;
     }
 
