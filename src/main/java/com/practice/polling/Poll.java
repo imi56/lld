@@ -4,10 +4,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.List;
 
-enum PollStatus {
-    ACTIVE, CLOSED
-}
-
 public class Poll {
     private final String pollId;
     private volatile String question; // `volatile` ensures visibility across threads
