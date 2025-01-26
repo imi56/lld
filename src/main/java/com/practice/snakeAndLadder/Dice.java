@@ -11,9 +11,18 @@ public class Dice {
     random = new Random();
   }
 
-  public static synchronized Dice getInstance() {
+  /* You used synchronized the getInstance() method itslef like public static synchronized Dice getInstance(), 
+  which is good for making it thread-safe. However, 
+  this implementation can lead to performance issues due to unnecessary synchronization once the instance is created.
+  A better approach is to use double-checked locking or an eager initialization approach. */
+  
+  public static Dice getInstance() {
     if (instance == null) {
-      instance = new Dice();
+      synchronized (Dice.class) {
+        if(instance == null) {
+          instance = new Dice();
+        }
+      }
     }
     return instance;
   }
